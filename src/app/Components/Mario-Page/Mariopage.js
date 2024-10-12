@@ -6,45 +6,85 @@ import styles from '../Mario-Page/mario.module.css';
 
 function Mariopages() {
   useEffect(() => {
+    const tl = gsap.timeline({ repeat: -1 });
   
     
-    gsap.fromTo(`.${styles.marioman}`,
-      { y:40 }, 
-      { 
-        y: 0, 
-       
-        duration: 0.75,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      }
-    );
-
-    gsap.fromTo(`.${styles.turtle}`,
-      { x: 50 },
+    gsap.fromTo(
+      `.${styles.turtle}`,
+      { x: 40 },
       { 
         x: 0, 
-       
-        duration: 0.75,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      }
-    );
-    gsap.fromTo(`.${styles.UP}`,
-      { x:10,y:-100 },
-      { 
-        x: 60, 
-        y:-200,
-        scale: 1.5,
         duration: 1,
         repeat: -1,
         yoyo: true,
-        ease: "power3.inOut"
+        ease: "power1.inOut",
       }
-    );
-
+    ); 
+    
+   
+    tl.to(`.${styles.marioman}`, {
+      y: -100,
+      duration: 1,
+      ease: "power2.out",
+    })
+    .to(`.${styles.marioman}`, {
+      y: 0, 
+      duration: 0.1,
+      ease: "power1.out",
+      onComplete: () => {
+       
+        gsap.to(`.${styles.turtle}`, {
+          scale: 0.8, 
+          duration: 0.1,
+          ease: "power2.out",
+        });
+  
+        
+        gsap.fromTo(
+          `.${styles.UP}`,
+          { opacity: 0, scale: 1, y: -100 },
+          { 
+            opacity: 1,
+            scale: 1.5,
+            y: -200,
+            duration: 1,
+            ease: "power3.out",
+            onComplete: () => {
+             
+              gsap.to(`.${styles.UP}`, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power1.out",
+                delay: 0.5,
+              });
+  
+              
+              gsap.to(`.${styles.turtle}`, {
+                scale: 1, 
+                duration: 0.3,
+                ease: "power2.inOut",
+              });
+            }
+          }
+        );
+      }
+    })
+  
+    .to(`.${styles.marioman}`, {
+      y: -40,
+      duration: 0.3,
+      ease: "power1.out",
+    })
+    .to(`.${styles.marioman}`, {
+      y: 0, 
+      duration: 0.3,
+      ease: "power1.in",
+    });
+  
   }, []);
+  
+  
+  
 
   return (
     <div className="Main-container relative h-screen w-731px bg-black">
