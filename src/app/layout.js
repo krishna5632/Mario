@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Mariopages from "./Components/Mario-Page/Mariopage";
+import SpaceWrapEffect from "./Components/SpaceWar/SpaceWar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,7 +22,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Mariopages/>
+       <SpaceWrapEffect/>
         
         {children}
       </body>

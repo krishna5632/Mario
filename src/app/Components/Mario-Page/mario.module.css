@@ -2,6 +2,7 @@
   left: 33%;
   top: 36%;
   z-index: 10;
+  /* transition: transform 0.6s easeInOutQuint; */
 }
 .turtle{
  
